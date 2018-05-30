@@ -1,3 +1,5 @@
+package Metier;
+
 public class Message {
     private Agent emetteur;
     private Agent Destinataire;

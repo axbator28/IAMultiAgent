@@ -1,3 +1,5 @@
+package Metier;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -9,10 +11,11 @@ public class Agent extends Thread implements Observer {
     static Grille grille; //Il va falloir gérer les accès concurrents
 
 
-    public Agent(int Xini, int Yini, int Xfin, int Yfin){
+    public Agent(int Xini, int Yini, int Xfin, int Yfin, String ava){
         super();
         position = new Coordonnee(Xini, Yini);
         posifinale = new Coordonnee(Xfin, Yfin);
+        avatar = ava;
     }
     //comportements
     public void run(){
