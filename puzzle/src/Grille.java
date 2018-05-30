@@ -1,9 +1,20 @@
 import java.util.ArrayList;
 
-public class Grille {
+public class Grille{
     private ArrayList<Agent> agents;
     private int taille;
-    private ArrayList<ArrayList<Message>> messages;
+    private StructureMess messages;
+
+    public boolean fin(){
+        boolean rep = true;
+        for(Agent agent: agents){
+            if(!agent.isPosFin()){
+                rep = false;
+            }
+        }
+        return rep;
+    }
+
 
 
 }
