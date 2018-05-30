@@ -1,5 +1,6 @@
 package Metier;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -21,7 +22,35 @@ public class Agent extends Thread implements Observer {
     public void run(){
         while(!grille.fin()){
             Boolean hasmoved=false;
+
+            //On commence par vérifier quelles sont les positions voisines dans la grille
+
+
             if(!isPosFin()){
+                ArrayList<Coordonnee> posipossibles = new ArrayList();
+                Coordonnee deplacement = position;
+                double distance = position.getDistance(posifinale);
+                if(position.getX()+1<grille.getTaille()){
+                    posipossibles.add(new Coordonnee(position.getX()+1,position.getY()));
+                }
+                if(position.getX()-1>=0){
+                    posipossibles.add(new Coordonnee(position.getX()-1,position.getY()));
+                }
+                if(position.getY()+1<grille.getTaille()){
+                    posipossibles.add(new Coordonnee(position.getX(),position.getY()+1));
+                }
+                if(position.getY()-1>=0){
+                    posipossibles.add(new Coordonnee(position.getX(),position.getY()-1));
+                }
+                for(Coordonnee posi: posipossibles){
+                    if(!grille.getCases().get(posi.getX()*7+posi.getY()).isOccupee()
+                            && posi.getDistance(posifinale)<distance){
+                        hasmoved = true;
+                        distance = posi.getDistance(posifinale);
+                        deplacement = posi;
+                    }
+                }
+
 
             }
 
@@ -56,5 +85,14 @@ public class Agent extends Thread implements Observer {
                 position.setX(position.getX()+1);
                 break;
         }
+    }
+
+
+    public Coordonnee getPosition() {
+        return position;
+    }
+
+    public void setPosition(Coordonnee position) {
+        this.position = position;
     }
 }

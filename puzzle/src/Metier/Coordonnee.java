@@ -32,4 +32,8 @@ public class Coordonnee {
     public boolean equals(Coordonnee coord2){
         return coord2.getX()==x && coord2.getY()==y;
     }
+
+    public int getKey(int taille){
+        return y+taille*x;
+    }
 }
