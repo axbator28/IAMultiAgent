@@ -3,8 +3,9 @@ package Metier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
-public class Grille{
+public class Grille extends Observable {
     private ArrayList<Agent> agents;
     private int taille;
     private StructureMess messages;
@@ -12,10 +13,11 @@ public class Grille{
 
     public Grille(int n){
         taille =n;
+        agents= new ArrayList<Agent>();
         cases = new HashMap();
         for(int i =0;i<n;i++){
             for(int j=0;j<n;j++){
-                cases.put(i*7+j, new Case(i,j));
+                cases.put(i*n+j, new Case(i,j));
             }
         }
     }
@@ -56,5 +58,20 @@ public class Grille{
 
     public Map<Integer, Case> getCases() {
         return cases;
+    }
+
+    public void addAgent(Agent a){
+        boolean posioufinok = true;
+        for(Agent ag : agents){
+            if(ag.getPosition().equals(a.getPosition())|| ag.getPosifinale().equals(a.getPosifinale())){
+                posioufinok=false;
+            }
+        }
+        if(posioufinok){
+            agents.add(a);
+            cases.get(a.getPosition().getY()+a.getPosition().getX()*taille).setA(a);
+            cases.get(a.getPosition().getY()+a.getPosition().getX()*taille).setOccupee(true);
+        }
+
     }
 }

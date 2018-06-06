@@ -36,4 +36,28 @@ public class Coordonnee {
     public int getKey(int taille){
         return y+taille*x;
     }
+
+    public char getDirection(Coordonnee c){
+        if(equals(c)){
+            return 'n';
+        }else{
+            if(getX() - c.getX() ==1 & getY() == c.getY()){
+                return 'g';
+            }
+            if(getX() - c.getX() ==-1 & getY() == c.getY()){
+                return 'd';
+            }
+            if(getX() == c.getX() & getY() - c.getY() ==1){
+                return 'b';
+            }
+            if(getX() == c.getX() & getY() - c.getY() ==-1){
+                return 'h';
+            }
+        }
+        return 'n';
+    }
+
+    public int number(int taille){
+        return getX()+getY()*taille;
+    }
 }
